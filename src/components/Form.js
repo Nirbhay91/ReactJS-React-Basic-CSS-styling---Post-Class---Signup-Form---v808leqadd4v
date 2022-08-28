@@ -22,18 +22,18 @@ function Form({getValues=()=>{}}) {
     else if(nameError){
       setNameError(false)
     }
-    if(!email.contains('@')){
-      setEmailError(true)
-      return;
-    }
+    // if(!email.contains('@')){
+    //   setEmailError(true)
+    //   return;
+    // }
     else if(emailError){
       setEmailError(false)
     }
 
-    if(pass.length<6){
-      setPasswordError(true)
-      return;
-    }
+    // if(pass.length<6){
+    //   setPasswordError(true)
+    //   return;
+    // }
     else if(passwordError){
       setPasswordError(false)
     }
@@ -56,7 +56,7 @@ function Form({getValues=()=>{}}) {
         <br />
         <label>
           Email address
-          <input onChange={(e)=> setEmail(e.target.value)} name="email" type="text"  data-testid="email" />
+          <input onChange={(e)=> setEmail(e.target.value)} name="email" type="email"  data-testid="email" />
         </label>
         {emailError&&<div>Name is not alphanumeric</div>}
         <br />

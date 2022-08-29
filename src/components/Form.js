@@ -5,7 +5,7 @@ function Form({getValues=()=>{}}) {
   const[nameError,setNameError]=useState(false)
   const[email,setEmail]=useState("")
   const[emailError,setEmailError]=useState(false)
-  const[gender,setGender]=useState("")
+  const[gender,setGender]=useState("male")
   const[genderError,setGenderError]=useState(false)
   const[phone,setPhone]=useState("")
   const[phoneError,setPhoneError]=useState(false)
@@ -22,18 +22,24 @@ function Form({getValues=()=>{}}) {
     else if(nameError){
       setNameError(false)
     }
-    // if(!email.contains('@')){
-    //   setEmailError(true)
-    //   return;
-    // }
+    if(!email.includes('@')){
+      setEmailError(true)
+      return;
+    }
     else if(emailError){
       setEmailError(false)
     }
+    if(isNaN(Number(phone))){
+      setPhoneError(true)
+      return
+    }else if(phoneError){
+      setPhoneError(false)
+    }
 
-    // if(pass.length<6){
-    //   setPasswordError(true)
-    //   return;
-    // }
+    if(password.length<6){
+      setPasswordError(true)
+      return;
+    }
     else if(passwordError){
       setPasswordError(false)
     }
@@ -56,22 +62,23 @@ function Form({getValues=()=>{}}) {
         <br />
         <label>
           Email address
-          <input onChange={(e)=> setEmail(e.target.value)} name="email" type="email"  data-testid="email" />
+          <input onChange={(e)=> setEmail(e.target.value)} name="email"  data-testid="email" />
         </label>
-        {emailError&&<div>Name is not alphanumeric</div>}
+        {emailError&&<div>Email must contain @</div>}
         <br />
         <label>
           Gender
           {/* <select type="text" /> */}
-          <select onChange={(e)=> setGender(e.target.value)} name="Gender" data-testid="gender">
-            <option>Male</option>
-            <option>Female</option>
+          <select value={gender} onChange={(e)=> setGender(e.target.value)} name="Gender" data-testid="gender">
+            <option selected>male</option>
+            <option>female</option>
+            <option>other</option>
           </select>
         </label>
         <br />
         <label>
           Phone
-          <input onChange={(e)=> setPhone(e.target.value)} name="phone" type="tel" data-testid="phoneNumber" />
+          <input onChange={(e)=> setPhone(e.target.value)} name="phone" data-testid="phoneNumber" />
         </label>
         {phoneError&&<div>Phone Number must contain only numbers</div>}
         <br />

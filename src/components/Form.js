@@ -17,6 +17,7 @@ function Form({getValues=()=>{}}) {
     e.preventDefault();
     if (!name.match(/^[\w\-\s]+$/)){
       setNameError(true)
+      getValues({})
       return;
     }
     else if(nameError){
@@ -24,6 +25,7 @@ function Form({getValues=()=>{}}) {
     }
     if(!email.includes('@')){
       setEmailError(true)
+      getValues({})
       return;
     }
     else if(emailError){
@@ -31,6 +33,7 @@ function Form({getValues=()=>{}}) {
     }
     if(isNaN(Number(phone))){
       setPhoneError(true)
+      getValues({})
       return
     }else if(phoneError){
       setPhoneError(false)
@@ -38,6 +41,7 @@ function Form({getValues=()=>{}}) {
 
     if(password.length<6){
       setPasswordError(true)
+      getValues({})
       return;
     }
     else if(passwordError){

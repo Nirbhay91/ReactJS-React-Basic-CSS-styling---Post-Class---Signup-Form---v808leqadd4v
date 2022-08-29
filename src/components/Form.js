@@ -11,10 +11,18 @@ function Form({getValues=()=>{}}) {
   const[phoneError,setPhoneError]=useState(false)
   const[password,setPassword]=useState("")
   const[passwordError,setPasswordError]=useState(false)
+  const [mendatroy, setMendatory] = useState(false);
 
   const handleSubmit = (e) => {
     e.persist()
     e.preventDefault();
+    if(!name || !email || !phone || !gender || !password){
+        setMendatory(true)
+        getValues({})
+        return;
+    }else if(mendatroy){
+      setMendatory(false)
+    }
     if (!name.match(/^[\w\-\s]+$/)){
       setNameError(true)
       getValues({})
@@ -92,6 +100,7 @@ function Form({getValues=()=>{}}) {
         </label>
         {passwordError&&<div>Password must contain atleast 6 letters</div>}
         <br />
+        {mendatroy&&<div> All fields are mandatory</div>}
         <button  role="submit" data-testid="submit">
           Submit
         </button>
